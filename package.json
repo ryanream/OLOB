@@ -1,0 +1,24 @@
+{
+  "name": "olob",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryanream/OLOB.git"
+  },
+  "author": "Ryan Ream",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ryanream/OLOB/issues"
+  },
+  "homepage": "https://github.com/ryanream/OLOB#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "jquery": "^3.3.1"
+  }
+}
