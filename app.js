@@ -1,11 +1,13 @@
 var express     = require("express"),
     app         = express(),
     mongoose    = require("mongoose"),
-    Post        = require('./models/post.js');
+    Post        = require("./models/post.js"),
+    bodyParser  = require("body-parser");
 
 mongoose.connect("mongodb://localhost/olob_blog", {useNewUrlParser: true});
-
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
+
 
 app.set("view engine", "ejs");
 // app.engine("html", require("ejs").renderFile);
@@ -21,6 +23,28 @@ app.get("/", function(req, res){
             console.log(err);
         } else {
             res.render("home", {posts: allPosts});
+        }
+    });
+});
+
+app.get("/new", function(req, res){
+   res.render("new"); 
+});
+
+app.post("/new", function(req, res){
+    // get data from form
+    var newTitle = req.body.title;
+    var newBody = req.body.body;
+    // add to posts array
+    var newPost = {title: newTitle, body: newBody};
+    
+    Post.create(newPost, function(err, newlyCreated){
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("title - " + newTitle);
+            console.log("body - " + newBody);
+            res.redirect("/");
         }
     });
 });
