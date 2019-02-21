@@ -8,10 +8,22 @@
             <% posts.reverse(); %>
             <% posts.forEach(function(post){ %>
                 <div class="post">
-                    <%= post.title %>
-                    <p class="firstParagraph">
+                    <p class="title">
+                        <%= post.title %>
+                    </p>
+                    <p id="postBody">
                         <%= post.body %>
                     </p>
+                    <% if(post.name) { %>
+                        <p id="postName">
+                            posted by: <%= post.name %>
+                        </p>
+                    <% } %>
+                   <% if(post.image) { %>
+                        <div class="thumbnail">
+                            <img src="<%= post.image %>">
+                        </div>
+                    <% } %>
                     <hr>
                 </div>
             <% }) %>

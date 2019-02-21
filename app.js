@@ -35,8 +35,9 @@ app.post("/new", function(req, res){
     // get data from form
     var newTitle = req.body.title;
     var newBody = req.body.body;
+    var newName = req.body.name;
     // add to posts array
-    var newPost = {title: newTitle, body: newBody};
+    var newPost = {title: newTitle, body: newBody, name: newName};
     
     Post.create(newPost, function(err, newlyCreated){
         if (err) {
@@ -44,6 +45,8 @@ app.post("/new", function(req, res){
         } else {
             console.log("title - " + newTitle);
             console.log("body - " + newBody);
+            console.log("name - " + newName);
+            console.log(req.body.image);
             res.redirect("/");
         }
     });

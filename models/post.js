@@ -5,7 +5,8 @@ mongoose.connect("mongodb://localhost/olob_blog", {useNewUrlParser: true});
 var postSchema = new mongoose.Schema({
     title: String,
     body: String,
-    date: String
+    name: String,
+    image: String
 });
 
 // Compile into a model (using above Schema) that allows the use of methods (.find(), .create())
