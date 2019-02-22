@@ -1,32 +1,38 @@
 <% include ../partials/header.ejs %>
 
-        <!--<h1>OLOB - April 6-7</h1>-->
-        <!--<h3>are you ready?</h3>-->
-        <a class="btn btn-primary" id="newPostButton" href="/new" role="button">New Post</a>
+    <!--<h1>OLOB - April 6-7</h1>-->
+    <!--<h3>are you ready?</h3>-->
+    <a class="btn btn-dark" id="newPostButton" href="/new" role="button">New Post!</a>
+    <!--reverse the order of posts and print. Does not actually reverse in DB.-->
+    <% posts.reverse(); %>
+    <% posts.forEach(function(post){ %>
         <div class="blog">
-            <!--reverse the order of posts and print. Does not actually reverse in DB.-->
-            <% posts.reverse(); %>
-            <% posts.forEach(function(post){ %>
-                <div class="post">
-                    <p class="title">
-                        <%= post.title %>
+            <div class="post">
+                <p class="title">
+                    <%= post.title %>
+                </p>
+                <p id="postBody">
+                    <%= post.body %>
+                </p>
+
+               <% if(post.image) { %>
+                    <div class="thumbnail">
+                        <img class="image" src="<%= post.image %>">
+                    </div>
+                <% } %>
+               <% if(post.photo) { %>
+                    <div class="thumbnail">
+                        <img class="photo" src="<%= post.photo %>">
+                    </div>
+                <% } %>
+                <% if(post.name) { %>
+                    <p id="postName">
+                        - <%= post.name %>
                     </p>
-                    <p id="postBody">
-                        <%= post.body %>
-                    </p>
-                    <% if(post.name) { %>
-                        <p id="postName">
-                            posted by: <%= post.name %>
-                        </p>
-                    <% } %>
-                   <% if(post.image) { %>
-                        <div class="thumbnail">
-                            <img src="<%= post.image %>">
-                        </div>
-                    <% } %>
-                    <hr>
-                </div>
-            <% }) %>
+                <% } %>
+            </div>
         </div>
+        <hr>
+    <% }) %>
         
 <% include ../partials/footer.ejs %>
