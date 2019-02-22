@@ -2,7 +2,8 @@ var express     = require("express"),
     app         = express(),
     mongoose    = require("mongoose"),
     Post        = require("./models/post.js"),
-    bodyParser  = require("body-parser");
+    bodyParser  = require("body-parser"),
+    methodOverride = require("method-override");
     
     mongoose.connect("mongodb://localhost/olob_blog", {useNewUrlParser: true});
 
@@ -29,14 +30,10 @@ var express     = require("express"),
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
-
+app.use(methodOverride("_method"));
 
 app.set("view engine", "ejs");
-// app.engine("html", require("ejs").renderFile);
-
-// app.get("/", function(req, res){
-//     res.render("home");
-// });
+app.engine("html", require("ejs").renderFile);
 
 app.get("/", function(req, res){
 //   Get all posts from DB
@@ -50,7 +47,7 @@ app.get("/", function(req, res){
 });
 
 app.get("/new", function(req, res){
-   res.render("new"); 
+  res.render("new"); 
 });
 
 app.post("/new", function(req, res){
@@ -72,6 +69,19 @@ app.post("/new", function(req, res){
         }
     });
 });
+
+// EDIT POST
+app.get("/:id/edit", function(req, res){
+    Post.findById(req.params.id, function(err, foundPost){
+        if(err){
+            res.redirect("/");
+        } else {
+            res.render("edit", {post: foundPost});
+        }
+    });
+});
+
+// DELETE POST
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("OLOB server is up and running!")

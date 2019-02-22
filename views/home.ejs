@@ -25,6 +25,8 @@
                         <img class="photo" src="<%= post.photo %>">
                     </div>
                 <% } %>
+                <a href="/<%= post._id %>/edit" class="btn-sm btn-dark">Edit</a>
+                <a href="/<%= post._id %>/edit" class="btn-sm btn-danger">Delete</a>
                 <% if(post.name) { %>
                     <p id="postName">
                         - <%= post.name %>

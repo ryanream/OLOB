@@ -93,3 +93,8 @@ hr {
     font-size: 18px;
     font-weight: 700;
 }
+
+.btn-danger {
+    font-family: 'PT Sans';
+    font-size: 18px;
+}
