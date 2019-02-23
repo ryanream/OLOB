@@ -81,6 +81,18 @@ app.get("/:id/edit", function(req, res){
     });
 });
 
+app.put("/:id", function(req, res){
+    // find and update correct post
+    Post.findByIdAndUpdate(req.params.id, req.body.post, function(err, updatedPost){
+        if(err){
+            res.redirect("/");
+        } else {
+            res.redirect("/")
+        }
+    });
+    // redirect
+});
+
 // DELETE POST
 
 app.listen(process.env.PORT, process.env.IP, function(){

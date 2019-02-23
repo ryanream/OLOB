@@ -1,18 +1,19 @@
 <% include ../partials/header.ejs %>
 
 <div id="newPostForm">
-    <form action="/new" method="POST" class="needs-validation" novalidate>
+    <!--something is wrong with this action address. Do I need the id somewhere?-->
+    <form action="/<%= post._id %>?_method=PUT" method="POST" class="needs-validation" novalidate>
         <div class="form-group">
-            <input class="form-control" type="text" name="title" value="<%= post.title %>" required>
+            <input class="form-control" type="text" name="post[title]" value="<%= post.title %>" required>
         </div>
         <div class="form-group">
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="body" required><%= post.body %></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="post[body]" required><%= post.body %></textarea>
         </div>
         <div class="form-group needs-validation">
-            <input class="form-control" type="text" id="validationCustom01" name="name" value="<%= post.name %>" required>
+            <input class="form-control" type="text" id="validationCustom01" name="post[name]" value="<%= post.name %>" required>
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" name="image" value="<%= post.image %>">
+            <input class="form-control" type="text" name="post[image]" value="<%= post.image %>">
         </div>
         <!--File upload not working. More info - https://www.npmjs.com/package/mongoose-file-->
         <!--<div class="form-group">-->

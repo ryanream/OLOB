@@ -35,6 +35,7 @@
 #postName {
     text-align: right;
     margin-right: 50px;
+    /*margin-top: 15px;*/
     font-family: 'PT Sans';
     font-size: 20px;
 }
@@ -86,14 +87,23 @@ hr {
     font-size: 18px;
     /*font-weight: 700;*/
 }
-
+/*light test*/
 .btn-light {
     background-color: #fff782;
     color: #4f3a10;
-    font-family: 'PT Sans Narrow';
+    font-family: 'PT Sans';
     font-size: 18px;
     font-weight: 700;
+    border: 1px solid yellow;
 }
+
+/*.btn-light {*/
+/*    background-color: #fff782;*/
+/*    color: #4f3a10;*/
+/*    font-family: 'PT Sans Narrow';*/
+/*    font-size: 18px;*/
+/*    font-weight: 700;*/
+/*}*/
 
 .btn-danger {
     font-family: 'PT Sans';
