@@ -80,6 +80,10 @@ hr {
     border: 1px solid red;
 }
 
+#deleteButton {
+    display: inline;
+}
+
 .btn-dark {
     background-color: #4f3a10;
     color: white;

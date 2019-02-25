@@ -35,6 +35,7 @@ app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 app.engine("html", require("ejs").renderFile);
 
+// HOME
 app.get("/", function(req, res){
 //   Get all posts from DB
     Post.find({}, function(err, allPosts){
@@ -46,10 +47,12 @@ app.get("/", function(req, res){
     });
 });
 
+// CREATE ROUTE
 app.get("/new", function(req, res){
   res.render("new"); 
 });
 
+// POST ROUTE
 app.post("/new", function(req, res){
     // get data from form
     var newTitle = req.body.title;
@@ -70,7 +73,7 @@ app.post("/new", function(req, res){
     });
 });
 
-// EDIT POST
+// SHOW ROUTE
 app.get("/:id/edit", function(req, res){
     Post.findById(req.params.id, function(err, foundPost){
         if(err){
@@ -81,6 +84,7 @@ app.get("/:id/edit", function(req, res){
     });
 });
 
+// EDIT ROUTE
 app.put("/:id", function(req, res){
     // find and update correct post
     Post.findByIdAndUpdate(req.params.id, req.body.post, function(err, updatedPost){
@@ -90,10 +94,18 @@ app.put("/:id", function(req, res){
             res.redirect("/")
         }
     });
-    // redirect
 });
 
-// DELETE POST
+// DESTROY ROUTE
+app.delete("/:id", function(req, res){
+    Post.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            res.redirect("/");
+        } else {
+            res.redirect("/");
+        }
+    })
+});
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("OLOB server is up and running!")

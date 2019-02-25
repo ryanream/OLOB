@@ -30,8 +30,10 @@
                         - <%= post.name %>
                     </p>
                 <% } %>
-                <a href="/<%= post._id %>/edit" class=" btn-sm btn-dark inPostButton">Edit</a>
-                <a href="/<%= post._id %>/edit" class=" btn-sm btn-light inPostButton">Delete</a>
+                <a href="/<%= post._id %>/edit" class="btn btn-sm btn-dark inPostButton">Edit</a>
+                <form action="/<%= post._id %>?_method=DELETE" id="deleteButton" method="POST">
+                    <button class="btn btn-sm btn-light inPostButton">Delete</button>
+                </form>
             </div>
         </div>
         <hr>
