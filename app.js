@@ -5,8 +5,12 @@ var express     = require("express"),
     bodyParser  = require("body-parser"),
     methodOverride = require("method-override");
     
-    // mongoose.connect("mongodb://localhost/olob_blog", {useNewUrlParser: true});
-    mongoose.connect("mongodb://ryanream:mongopassword@cluster0-shard-00-00-mqbh5.mongodb.net:27017,cluster0-shard-00-01-mqbh5.mongodb.net:27017,cluster0-shard-00-02-mqbh5.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true", {useNewUrlParser: true});
+console.log(process.env.DATABASEURL);
+
+mongoose.connect(process.env.DATABASEURL, {useNewUrlParser: true});
+
+// mongoose.connect("mongodb://localhost/olob_blog", {useNewUrlParser: true});
+// mongoose.connect("mongodb://ryanream:mongopassword@cluster0-shard-00-00-mqbh5.mongodb.net:27017,cluster0-shard-00-01-mqbh5.mongodb.net:27017,cluster0-shard-00-02-mqbh5.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true", {useNewUrlParser: true});
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
