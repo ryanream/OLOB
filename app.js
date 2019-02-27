@@ -5,9 +5,11 @@ var express     = require("express"),
     bodyParser  = require("body-parser"),
     methodOverride = require("method-override");
     
-    mongoose.connect("mongodb://localhost/olob_blog", {useNewUrlParser: true});
+    // mongoose.connect("mongodb://localhost/olob_blog", {useNewUrlParser: true});
+    mongoose.connect("mongodb://ryanream:mongopassword@cluster0-shard-00-00-mqbh5.mongodb.net:27017,cluster0-shard-00-01-mqbh5.mongodb.net:27017,cluster0-shard-00-02-mqbh5.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true", {useNewUrlParser: true});
 
-// mongodb+srv://ryanream:<PASSWORD>@cluster0-mqbh5.mongodb.net/test?retryWrites=true
+    // mongodb+srv://ryanream:mongopassword@cluster0-mqbh5.mongodb.net/olob_blog?retryWrites=true
+//  mongodb+srv://ryanream:<PASSWORD>@cluster0-mqbh5.mongodb.net/test?retryWrites=true
 // mongoose.connect("mongodb+srv://ryanream:<mongopassword>@cluster0-mqbh5.mongodb.net/test?retryWrites=true", {useNewUrlParser: true});
     // var uri = "mongodb://ryanream:mongopassword@cluster0-shard-00-00-mqbh5.mongodb.net:27017,mycluster0-shard-00-01.mongodb.net:27017,mycluster0-shard-00-02.mongodb.net:27017/admin?ssl=true&replicaSet=Mycluster0-shard-0&authSource=admin";
 
@@ -18,10 +20,10 @@ var express     = require("express"),
     //     if(err) {
     //         console.log(err);
     //     }
-    // });    
+    // });
     
     // var MongoClient = require('mongodb').MongoClient;
-    // var uri = "mongo "mongodb+srv://cluster0-mqbh5.mongodb.net/test";
+    // var uri = "mongodb+srv://cluster0-mqbh5.mongodb.net/olob_blog";
     // MongoClient.connect(uri, {useNewUrlParser: true}, function(err, db) {
     //     if(err) {
     //         console.log(err);
@@ -67,7 +69,7 @@ app.post("/new", function(req, res){
         if (err) {
             console.log(err);
         } else {
-            console.log("New post by - " + newName);
+            console.log("A new post by " + newName + " was published.");
             res.redirect("/");
         }
     });
