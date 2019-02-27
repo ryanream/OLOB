@@ -32,6 +32,10 @@
     font-size: 24px;
 }
 
+#center {
+    text-align: center;
+}
+
 #postName {
     text-align: right;
     margin-right: 50px;
