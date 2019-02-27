@@ -4,13 +4,12 @@ var express     = require("express"),
     Post        = require("./models/post.js"),
     bodyParser  = require("body-parser"),
     methodOverride = require("method-override");
-    
-console.log(process.env.DATABASEURL);
 
+    // DATABASEURL is an environment variable containing a 
+    // db string set locally in C9 and set separately in Heroku. 
+    // Locally we need to start the mongod  process, on Heroku we 
+    // utilize a cloud mongoDB cluster.
 mongoose.connect(process.env.DATABASEURL, {useNewUrlParser: true});
-
-// mongoose.connect("mongodb://localhost/olob_blog", {useNewUrlParser: true});
-// mongoose.connect("mongodb://ryanream:mongopassword@cluster0-shard-00-00-mqbh5.mongodb.net:27017,cluster0-shard-00-01-mqbh5.mongodb.net:27017,cluster0-shard-00-02-mqbh5.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true", {useNewUrlParser: true});
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
