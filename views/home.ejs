@@ -3,6 +3,10 @@
     <!--<h1>OLOB - April 6-7</h1>-->
     <!--<h3>are you ready?</h3>-->
     <a class="btn btn-dark" id="newPostButton" href="/new" role="button">New Post!</a>
+    <div id="infoButtons">  
+        <button type="button" id="btnPopover" class="btn btn-light" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Boo!!">April 6-7</button>
+        <!--<button type="button" id="btnPopover" class="btn btn-light" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Benji | Alex | Ream">Captains</button>-->
+    </div>
     <!--reverse the order of posts and print. Does not actually reverse in DB.-->
     <% posts.reverse(); %>
     <% posts.forEach(function(post){ %>
