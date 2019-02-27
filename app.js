@@ -93,7 +93,12 @@ app.delete("/:id", function(req, res){
 // INFO ROUTE
 app.get("/info", function(req, res){
     res.render("info");
-})
+});
+
+// HAMMERTIME ROUTE
+app.get("/hammertime", function(req, res){
+   res.render("hammertime"); 
+});
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("OLOB server is up and running!")
