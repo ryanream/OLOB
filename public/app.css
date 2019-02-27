@@ -26,6 +26,10 @@
     text-transform: uppercase;
     /*font-weight: 400;*/
 }
+.infoTitle {
+    border-left: 5px solid #fff782;
+    padding-left: 5px;
+}
 
 #postBody {
     font-family: 'PT Sans Narrow';
