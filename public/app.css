@@ -20,6 +20,10 @@
     font-weight: 700;
 }
 
+#bootNavBar {
+    margin-bottom: 10px;
+}
+
 .title {
     border-left: 5px solid #fff782;
     padding-left: 5px;
@@ -85,14 +89,14 @@ hr {
 }
 
 .buttonMargin {
-    margin: 10px;
+    /*margin: 10px;*/
 }
 
 #infoButtons{
     display: inline;
     /*alignment-baseline: right;*/
     /*float: right;*/
-    margin: 10px;
+    /*margin: 10px;*/
     /*text-align: right;*/
 }
 

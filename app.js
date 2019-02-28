@@ -1,6 +1,7 @@
 var express     = require("express"),
     app         = express(),
     mongoose    = require("mongoose"),
+    flash       = require("connect-flash"),
     passport    = require("passport"),
     LocalStrategy = require("passport-local"),
     Post        = require("./models/post.js"),
@@ -18,7 +19,7 @@ mongoose.connect(process.env.DATABASEURL, {useNewUrlParser: true});
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
-
+app.use(flash());
 
 
 app.set("view engine", "ejs");
@@ -39,6 +40,8 @@ passport.deserializeUser(User.deserializeUser());
 // middleware to pass user to every route
 app.use(function(req, res, next){
    res.locals.currentUser = req.user;
+   res.locals.error = req.flash("error");
+   res.locals.success = req.flash("success");
    next();
 });
 
@@ -60,6 +63,7 @@ app.post("/register", function(req, res){
             return res.render("register");
         }
         passport.authenticate("local")(req, res, function(){
+            req.flash("success", "Welcome to AOLob " + req.body.username + "!!");
             res.redirect("/");
         });
     });
@@ -74,13 +78,15 @@ app.get("/login", function(req, res){
 app.post("/login", passport.authenticate("local",
     {
         successRedirect: "/",
-        failureRedirect: "/login"
+        failureRedirect: "/login",
     }), function(req, res){
+            
 });
 
 // Logout route
 app.get("/logout", function(req, res){
     req.logout();
+    req.flash("success", "You have successfully logged out.");
     res.redirect("/");
 });
 
@@ -96,12 +102,12 @@ app.get("/", function(req, res){
     });
 });
 
-// CREATE ROUTE
+// New post create page
 app.get("/new", isLoggedIn, function(req, res){
   res.render("new"); 
 });
 
-// POST ROUTE
+// New post - post route
 app.post("/new", isLoggedIn, function(req, res){
     // get data from form
     var newTitle = req.body.title;
@@ -122,8 +128,8 @@ app.post("/new", isLoggedIn, function(req, res){
     });
 });
 
-// SHOW ROUTE
-app.get("/:id/edit", function(req, res){
+// SHOW ROUTE - show the edit post page
+app.get("/:id/edit", isLoggedIn, function(req, res){
     Post.findById(req.params.id, function(err, foundPost){
         if(err){
             res.redirect("/");
@@ -146,7 +152,7 @@ app.put("/:id", function(req, res){
 });
 
 // DESTROY ROUTE
-app.delete("/:id", function(req, res){
+app.delete("/:id", isLoggedIn, function(req, res){
     Post.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/");
@@ -166,10 +172,12 @@ app.get("/hammertime", function(req, res){
    res.render("hammertime"); 
 });
 
+// MIDDLEWARE
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }
+    req.flash("error", "Please login first.");
     res.redirect("/login");
 }
 
