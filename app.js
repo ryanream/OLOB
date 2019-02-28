@@ -1,22 +1,88 @@
 var express     = require("express"),
     app         = express(),
     mongoose    = require("mongoose"),
+    passport    = require("passport"),
+    LocalStrategy = require("passport-local"),
     Post        = require("./models/post.js"),
     bodyParser  = require("body-parser"),
+    User        = require("./models/user"),
     methodOverride = require("method-override");
 
     // DATABASEURL is an environment variable containing a 
     // db string set locally in C9 and set separately in Heroku. 
     // Locally we need to start the mongod  process, on Heroku we 
     // utilize a cloud mongoDB cluster.
+// export DATABASEURL=mongodb://localhost/olob_blog **** to set locally****
 mongoose.connect(process.env.DATABASEURL, {useNewUrlParser: true});
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 
+
+
 app.set("view engine", "ejs");
 app.engine("html", require("ejs").renderFile);
+
+// PASSPORT CONFIGURATION
+app.use(require("express-session")({
+   secret: "aolob forever",
+   resave: false,
+   saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// middleware to pass user to every route
+app.use(function(req, res, next){
+   res.locals.currentUser = req.user;
+   next();
+});
+
+// ====================
+// AUTH ROUTES
+// ====================
+
+// show register form
+app.get("/register", function(req, res){
+    res.render("register");
+});
+
+// handle sign up logic
+app.post("/register", function(req, res){
+    var newUser = new User({username: req.body.username});
+    User.register(newUser, req.body.password, function(err, user){
+        if(err){
+            console.log(err);
+            return res.render("register");
+        }
+        passport.authenticate("local")(req, res, function(){
+            res.redirect("/");
+        });
+    });
+});
+
+// show login form
+app.get("/login", function(req, res){
+   res.render("login");
+});
+
+// handle login logic
+app.post("/login", passport.authenticate("local",
+    {
+        successRedirect: "/",
+        failureRedirect: "/login"
+    }), function(req, res){
+});
+
+// Logout route
+app.get("/logout", function(req, res){
+    req.logout();
+    res.redirect("/");
+});
 
 // HOME
 app.get("/", function(req, res){
@@ -31,12 +97,12 @@ app.get("/", function(req, res){
 });
 
 // CREATE ROUTE
-app.get("/new", function(req, res){
+app.get("/new", isLoggedIn, function(req, res){
   res.render("new"); 
 });
 
 // POST ROUTE
-app.post("/new", function(req, res){
+app.post("/new", isLoggedIn, function(req, res){
     // get data from form
     var newTitle = req.body.title;
     var newBody = req.body.body;
@@ -99,6 +165,13 @@ app.get("/info", function(req, res){
 app.get("/hammertime", function(req, res){
    res.render("hammertime"); 
 });
+
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+}
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("OLOB server is up and running!")

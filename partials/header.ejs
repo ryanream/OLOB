@@ -12,7 +12,7 @@
     <body>
         <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #fff782; border-radius: 15px;">
           <!--<a class="navbar-brand" href="/"><img id="aim" src="https://image.flaticon.com/icons/svg/78/78077.svg"></img></a>-->
-          <a class="navbar-brand" href="/info"><img id="aim" src="http://aux.iconspalace.com/uploads/aim-icon-256-380076021.png"></img></a>
+          <a class="navbar-brand" href="/"><img id="aim" src="http://aux.iconspalace.com/uploads/aim-icon-256-380076021.png"></img></a>
           <!--cannot get local images to display.... :-/ ....-->
           <!--<a class="navbar-brand" href="/"><img id="aim" src="../images/aim.png"></img></a>-->
           <!--<a class="navbar-brand" href="/"><img id="aim" src="https://image.flaticon.com/icons/svg/38/38305.svg"></img></a>-->
@@ -24,8 +24,16 @@
                 <!--<a class="nav-item nav-link active" href="/">Home<span class="sr-only">(current)</span></a>-->
                 <a class="nav-item nav-link active" href="/" id="aolob">AOLob</a>
                 <div id="links">
-                    <a class="nav-item nav-link" href="/hammertime">Hammertime!</a>                  
-                    <a class="nav-item nav-link" href="/info">AOLob Infotainment</a>
+                    <!--<a class="nav-item nav-link" href="/hammertime">Hammertime!</a>-->
+                    <!--<a class="nav-item nav-link" href="/info">AOLob Infotainment</a>-->
+                    <% if(!currentUser){ %>
+                        <a class="nav-item nav-link" href="/login">Login</a>
+                        <a class="nav-item nav-link" href="/register">Sign Up</a>
+                    <% } else { %>
+                        <!--else - -->
+                        <a class="nav-item nav-link" href="#"><%= currentUser.username %></a>
+                        <a class="nav-item nav-link" href="/logout">Logout</a>
+                    <% } %>
                     <!--Larry sends it - href="https://youtu.be/mzOUgwsQ_hM?t=29"-->
                 </div>
                 <!--<a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->

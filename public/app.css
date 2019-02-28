@@ -90,6 +90,10 @@ hr {
 
 #infoButtons{
     display: inline;
+    /*alignment-baseline: right;*/
+    /*float: right;*/
+    margin: 10px;
+    /*text-align: right;*/
 }
 
 .invalid {
