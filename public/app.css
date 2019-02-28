@@ -84,7 +84,7 @@ hr {
     margin: 25px auto;
 }
 
-#newPostButton {
+.buttonMargin {
     margin: 10px;
 }
 
@@ -102,6 +102,16 @@ hr {
 
 #deleteButton {
     display: inline;
+}
+
+#signUp {
+    float: right;
+}
+
+#login {
+    font-family: 'PT Sans';
+    font-size: 36px;
+    
 }
 
 .btn-dark {
