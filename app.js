@@ -129,66 +129,6 @@ app.post("/new", isLoggedIn, function(req, res){
     });
 });
 
-// ================================
-//      COMMENTS ROUTES
-// ================================
-
-// SHOW ROUTE | NEW COMMENT ROUTE
-app.get("/:id", function(req, res){
-        Post.findById(req.params.id).populate("comments").exec(function(err, post){
-        if(err){
-            console.log(err);
-            res.redirect("/");
-        } else {
-            res.render("show", {post: post});
-        }
-    });
-});
-
-// NEW COMMENT ROUTE
-
-app.post("/:id", function(req, res){
-    // lookup post by id
-    // create new comment
-    // connect new comment to post
-    // redirect to show page for same post
-    
-    Post.findById(req.params.id, function(err, post){
-        if(err){
-            console.log(err);
-            res.redirect("/");
-        } else {
-           Comment.create(req.body.comment, function(err, comment){
-               if(err){
-                    console.log(err);
-               } else {
-                    post.comments.push(comment);
-                    post.save();
-                    res.redirect("/" + post._id);
-               }
-           });
-        }
-    });
-    
-    // Post.findById(req.params.id, function(err, post){
-    //   if(err){
-    //       console.log("ERROR");
-    //       console.log(err);
-    //       res.redirect("/");
-    //   } else {
-    //       Comment.create(req.params.id, function(err, comment){
-    //           if(err){
-    //               console.log(err);
-    //           } else {
-    //               post.comments.push(comment);
-    //               post.save();
-    //               res.redirect("/" + post._id);
-    //           }
-    //       });
-    //   }
-    // });
-});
-
 // EDIT ROUTE - show the edit post page
 app.get("/:id/edit", isLoggedIn, function(req, res){
     Post.findById(req.params.id, function(err, foundPost){
@@ -231,6 +171,48 @@ app.get("/info", function(req, res){
 // HAMMERTIME ROUTE
 app.get("/hammertime", function(req, res){
    res.render("hammertime"); 
+});
+
+// ================================
+//      COMMENTS ROUTES
+// ================================
+
+// SHOW ROUTE | NEW COMMENT ROUTE
+app.get("/:id", function(req, res){
+        Post.findById(req.params.id).populate("comments").exec(function(err, post){
+        if(err){
+            console.log(err);
+            res.redirect("/");
+        } else {
+            res.render("show", {post: post});
+        }
+    });
+});
+
+// NEW COMMENT ROUTE
+
+app.post("/:id", function(req, res){
+    // lookup post by id
+    // create new comment
+    // connect new comment to post
+    // redirect to show page for same post
+    
+    Post.findById(req.params.id, function(err, post){
+        if(err){
+            console.log(err);
+            res.redirect("/");
+        } else {
+           Comment.create(req.body.comment, function(err, comment){
+               if(err){
+                    console.log(err);
+               } else {
+                    post.comments.push(comment);
+                    post.save();
+                    res.redirect("/" + post._id);
+               }
+           });
+        }
+    });
 });
 
 // MIDDLEWARE
