@@ -1,0 +1,52 @@
+<% include ../partials/header.ejs %>
+
+    <div class="blog">
+        <div class="post">
+            <p class="title">
+                <%= post.title %>
+            </p>
+            <p id="postBody">
+                <%= post.body %>
+            </p>
+
+           <% if(post.image) { %>
+                <div class="thumbnail">
+                    <img class="image" src="<%= post.image %>">
+                </div>
+            <% } %>
+           <% if(post.photo) { %>
+                <div class="thumbnail">
+                    <img class="photo" src="<%= post.photo %>">
+                </div>
+            <% } %>
+            <% if(post.name) { %>
+                <p id="postName">
+                    - <%= post.name %>
+                </p>
+            <% } %>      
+            <% post.comments.forEach(function(comment){ %>
+                <p>
+                    <strong><%= comment.author %></strong> - <%= comment.text %>
+                </p>
+            <% }) %>
+            <% if(currentUser) { %>
+                <form action="/<%= post._id %>" method="POST">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="comment[text]" placeholder="add a comment">
+                        <!--<textarea class="form-control commentBox" id="exampleFormControlTextarea1" rows="3" name="comment[text]" placeholder="add a comment" required></textarea>-->
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="comment[author]" value="<%= currentUser.username %>" readonly>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-light">Add Comment</button>                
+                    </div>
+                <% } else { %>
+                    <a class="btn btn-light" href="/login">Sign in to comment</a>
+                <% } %>
+            </form>
+
+        </div>
+    </div>
+
+<% include ../partials/footer.ejs %>

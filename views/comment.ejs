@@ -1,0 +1,21 @@
+<% include ../partials/header.ejs %>
+
+<div id="newPostForm">
+    <form action="/comment" method="POST" class="needs-validation" novalidate>
+        <div class="form-group">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comment" placeholder="this better be interesting!" required></textarea>
+        </div>
+       <div class="form-group">
+            <input class="form-control" type="text" name="image" placeholder="have an image link? Put it here!">
+        </div>
+        <div class="form-group needs-validation">
+            <input class="form-control" type="text" id="validationCustom01" name="name" value="<%= currentUser.username %>" required>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-lrg btn-default btn-dark btn-block">Publish this puppy</button>
+        </div>
+    </form>
+    <a class="btn btn-light" href="/" role="button">Go Back</a>
+</div>
+
+<% include ../partials/footer.ejs %>

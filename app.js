@@ -7,6 +7,7 @@ var express     = require("express"),
     Post        = require("./models/post.js"),
     bodyParser  = require("body-parser"),
     User        = require("./models/user"),
+    Comment     = require("./models/comment"),
     methodOverride = require("method-override");
 
     // DATABASEURL is an environment variable containing a 
@@ -128,7 +129,67 @@ app.post("/new", isLoggedIn, function(req, res){
     });
 });
 
-// SHOW ROUTE - show the edit post page
+// ================================
+//      COMMENTS ROUTES
+// ================================
+
+// SHOW ROUTE | NEW COMMENT ROUTE
+app.get("/:id", function(req, res){
+        Post.findById(req.params.id).populate("comments").exec(function(err, post){
+        if(err){
+            console.log(err);
+            res.redirect("/");
+        } else {
+            res.render("show", {post: post});
+        }
+    });
+});
+
+// NEW COMMENT ROUTE
+
+app.post("/:id", function(req, res){
+    // lookup post by id
+    // create new comment
+    // connect new comment to post
+    // redirect to show page for same post
+    
+    Post.findById(req.params.id, function(err, post){
+        if(err){
+            console.log(err);
+            res.redirect("/");
+        } else {
+           Comment.create(req.body.comment, function(err, comment){
+               if(err){
+                    console.log(err);
+               } else {
+                    post.comments.push(comment);
+                    post.save();
+                    res.redirect("/" + post._id);
+               }
+           });
+        }
+    });
+    
+    // Post.findById(req.params.id, function(err, post){
+    //   if(err){
+    //       console.log("ERROR");
+    //       console.log(err);
+    //       res.redirect("/");
+    //   } else {
+    //       Comment.create(req.params.id, function(err, comment){
+    //           if(err){
+    //               console.log(err);
+    //           } else {
+    //               post.comments.push(comment);
+    //               post.save();
+    //               res.redirect("/" + post._id);
+    //           }
+    //       });
+    //   }
+    // });
+});
+
+// EDIT ROUTE - show the edit post page
 app.get("/:id/edit", isLoggedIn, function(req, res){
     Post.findById(req.params.id, function(err, foundPost){
         if(err){
@@ -139,7 +200,7 @@ app.get("/:id/edit", isLoggedIn, function(req, res){
     });
 });
 
-// EDIT ROUTE
+// EDIT ROUTE - Edit the post
 app.put("/:id", function(req, res){
     // find and update correct post
     Post.findByIdAndUpdate(req.params.id, req.body.post, function(err, updatedPost){
@@ -182,5 +243,5 @@ function isLoggedIn(req, res, next){
 }
 
 app.listen(process.env.PORT, process.env.IP, function(){
-    console.log("OLOB server is up and running!")
+    console.log("OLOB server is up and running!");
 });

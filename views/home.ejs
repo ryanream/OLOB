@@ -3,15 +3,15 @@
     <!--<h3>are you ready?</h3>-->
     <a class="btn btn-dark buttonMargin" href="/new" role="button">New Post!</a>
     <div id="infoButtons">
-        <a class="btn btn-light" href="/hammertime" role="button">Hammertime!</a>
-        <a class="btn btn-light" href="/info" role="button">Infotainment</a>
+        <a class="btn btn-light" href="hammertime" role="button">Hammertime!</a>
+        <a class="btn btn-light" href="info" role="button">Infotainment</a>
         <!--<a class="nav-item nav-link" href="/hammertime">Hammertime!</a>-->
         <!--<a class="nav-item nav-link" href="/info">AOLob Infotainment</a>-->
         <button type="button" id="btnPopover" class="btn btn-light" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Go see the info page!">April 6-7</button>
         <!--<button type="button" id="btnPopover" class="btn btn-light" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Benji | Alex | Ream">Captains</button>-->
     </div>
     <!--reverse the order of posts and print. Does not actually reverse in DB.-->
-    <% posts.reverse(); %>
+    <% posts.reverse() %>
     <% posts.forEach(function(post){ %>
         <div class="blog">
             <div class="post">
@@ -37,13 +37,47 @@
                         - <%= post.name %>
                     </p>
                 <% } %>
-                <a href="/<%= post._id %>/edit" class="btn btn-sm btn-dark inPostButton">Edit</a>
-                <form action="/<%= post._id %>?_method=DELETE" id="deleteButton" method="POST">
-                    <button class="btn btn-sm btn-light inPostButton">Delete</button>
-                </form>
+                <a href="/<%= post._id %>" class="btn btn-sm btn-dark inPostButton">Comments</a>
+                
+                <% if(currentUser && currentUser.username === post.name){ %>
+                    <a href="/<%= post._id %>/edit" class="btn btn btn-light inPostButton">Edit</a>
+                    <form action="/<%= post._id %>?_method=DELETE" id="deleteButton" method="POST">
+                        <button class="btn btn-light">Delete</button>
+                    </form>
+                <% } %>
+                <!--on button click, call popover / alert-->
+                <!-- Button trigger modal -->
+                <!--<button type="button" class="btn btn-sm btn-light inPostButton" data-toggle="modal" data-target="#exampleModalCenter">-->
+                <!--  Delete-->
+                <!--</button>-->
+                
+                <!-- Modal -->
+                <!--<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">-->
+                <!--  <div class="modal-dialog modal-dialog-centered" role="document">-->
+                <!--    <div class="modal-content">-->
+                <!--      <div class="modal-header">-->
+                <!--        <h5 class="modal-title" id="exampleModalCenterTitle">Delete Me?</h5>-->
+                <!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                <!--          <span aria-hidden="true">&times</span>-->
+                <!--        </button>-->
+                <!--      </div>-->
+                <!--      <div class="modal-body">-->
+                <!--        This procedure cannot be undone.-->
+                <!--      </div>-->
+                <!--      <div class="modal-footer">-->
+                <!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Forget it</button>-->
+                        <!--<button type="button" class="btn btn-primary">Delete</button>-->
+                <!--      </div>-->
+                <!--    </div>-->
+                <!--  </div>-->
+                <!--</div>-->
+                <!--from popover, call delete method-->
+
+
+                
             </div>
         </div>
         <hr>
     <% }) %>
-        
+
 <% include ../partials/footer.ejs %>

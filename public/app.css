@@ -132,7 +132,7 @@ hr {
     font-family: 'PT Sans';
     font-size: 18px;
     font-weight: 700;
-    border: 1px solid yellow;
+    /*border: 1px solid #fff782;*/
 }
 
 /*.btn-light {*/
@@ -146,4 +146,8 @@ hr {
 .btn-danger {
     font-family: 'PT Sans';
     font-size: 18px;
+}
+
+.commentBox {
+    margin-top: 10px;
 }
