@@ -35,7 +35,8 @@
                         - <%= post.name %>
                     </p>
                 <% } %>
-                <a href="/<%= post._id %>" class="btn btn-sm btn-dark inPostButton">Comments</a>
+                
+                <a href="/<%= post._id %>" class="btn btn-sm btn-dark inPostButton">Comments ( <%= post.comments.length %> )</a>
                 
                 <% if(currentUser && currentUser.username === post.name){ %>
                     <a href="/<%= post._id %>/edit" class="btn btn btn-light inPostButton">Edit</a>
@@ -71,8 +72,25 @@
                 <!--</div>-->
                 <!--from popover, call delete method-->
 
-
-                
+            <!--<div>-->
+            <!--    <button class="likeButt btn btn-light">Like</button>-->
+            <!--    <button class="noLikeButt btn btn-dark">No Like</button>-->
+            <!--</div>-->
+            
+            <!--    <script>-->
+            <!--        var likeButt = document.querySelector("likeButt");-->
+            <!--        var noLikeButt = document.querySelector("noLikeButt");-->
+            <!--        var likeCount;-->
+            <!--        var noLikeCount;-->
+            <!--        likeButt.addEventListener("click", function(){-->
+            <!--            likeCount += 1;-->
+            <!--            console.log(likeCount);-->
+            <!--        });-->
+            <!--        noLikeButt.addEventListener("click", function(){-->
+            <!--            noLikeCount += 1;-->
+            <!--            console.log(noLikeCount);-->
+            <!--        });-->
+            <!--    </script>-->
             </div>
         </div>
         <hr>
