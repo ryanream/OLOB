@@ -12,13 +12,8 @@
             <input class="form-control" type="text" name="image" placeholder="have an image link? Put it here!">
         </div>
         <div class="form-group needs-validation">
-            <input class="form-control" type="text" id="validationCustom01" name="name" value="<%= currentUser.username %>" required>
+            <input class="form-control" type="text" id="validationCustom01" name="name" value="<%= currentUser.username %>" readonly>
         </div>
-         <!--File upload not working. More info - https://www.npmjs.com/package/mongoose-file-->
-        <!--<div class="form-group">-->
-        <!--    <label for="exampleFormControlFile1">Photo Upload</label>-->
-        <!--    <input class="form-control-file" type="file" name="photo" id="exampleFormControlFile1">-->
-        <!--</div>-->
         <div class="form-group">
             <button class="btn btn-lrg btn-default btn-dark btn-block">Publish this puppy</button>
         </div>

@@ -38,13 +38,22 @@
                     <div class="form-group">
                         <input class="form-control" type="text" name="comment[author]" value="<%= currentUser.username %>" readonly>
                     </div>
-                    <div class="form-group">
-                        <button class="btn btn-light">Add Comment</button>                
-                    </div>
+                    <!--<div class="form-group">-->
+                        <button class="form-group btn btn-light">Add Comment</button>                
+                    <!--</div>-->
+                    <!--if the user is the owner of this post, show edit/delete post buttons-->
+                </form>
+                    <% if (currentUser.username === post.name) { %>
+                        <!--<div class="edit-delete">-->
+                            <a href="/<%= post._id %>/edit" class="btn btn-dark inPostButton">Edit</a>
+                            <form action="/<%= post._id %>?_method=DELETE" id="deleteButton" method="POST">
+                                <button class="btn btn-dark">Delete</button>
+                            </form>
+                        <!--</div>-->
+                   <% } %>
                 <% } else { %>
                     <a class="btn btn-light" href="/login">Sign in to comment</a>
                 <% } %>
-            </form>
 
         </div>
     </div>
