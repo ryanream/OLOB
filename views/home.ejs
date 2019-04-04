@@ -16,7 +16,7 @@
                 <p class="title">
                     <%= post.title %>
                 </p>
-                <p id="postBody">
+                <div id="postBody">
                     <% if(post.body === "Ream's OLOB message"){ %>
                         <p>Please keep in mind that tickets and fines WILL BE ISSUED 
                         for open alcohol containers this weekend, as they are every year. 
@@ -48,7 +48,7 @@
                     <% } else { %>
                         <%= post.body %>
                     <% } %>
-                </p>
+                </div>
 
                <% if(post.image) { %>
                     <div class="thumbnail">
