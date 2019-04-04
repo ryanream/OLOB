@@ -17,7 +17,37 @@
                     <%= post.title %>
                 </p>
                 <p id="postBody">
-                    <%= post.body %>
+                    <% if(post.body === "Ream's OLOB message"){ %>
+                        <p>Please keep in mind that tickets and fines WILL BE ISSUED 
+                        for open alcohol containers this weekend, as they are every year. 
+                        My guess is smoking is also prohibited. </p>
+                        
+                        <p>If we get ticketed at our camp, we get ticketed as a team and 
+                        will split the fine. With that said, everyone has a responsibility 
+                        to be smart about their preferred method of consumption during 
+                        the tourney.</p>
+
+                    <ul>***** DO *****
+                        <li>use a nalgene or water bottle to hold your mixed beverage!</li>
+                        <li>enjoy your favorite edibles!</li>
+                        <li>DRINK WATER!</li>
+                        <li>make jello shots!</li>
+                        <li>DRINK WATER!</li>
+                    </ul>
+                    <ul>***** DO NOT*****
+                        <li>bring bottles or glass</li>
+                        <li>openly carry alcohol around in its original container</li>
+                        <li>smoke cigarettes</li>
+                        <li>bring basic ass, obvious, solo cups</li>
+                        <li>let police look in your bag or cooler</li>
+                    </ul>
+                    
+                    <p>Please add more dos/don'ts to the comments section 
+                    and I'll update the post!!</p>
+
+                    <% } else { %>
+                        <%= post.body %>
+                    <% } %>
                 </p>
 
                <% if(post.image) { %>
